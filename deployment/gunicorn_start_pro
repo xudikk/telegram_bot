@@ -1,0 +1,27 @@
+#!/bin/bash
+
+NAME="gunicorn_production"
+DIR=/var/www/yesboss/src
+WORKERS=2
+BIND=/var/www/yesboss/run/gunicorn.sock
+DJANGO_SETTINGS_MODULE=yesboss.settings
+DJANGO_WSGI_MODULE=yesboss.wsgi
+
+cd $DIR
+source ../bin/activate
+
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=$DIR:$PYTHONPATH
+
+
+# Create the run directory if it doesn't exist
+RUNDIR=$(dirname $BIND)
+test -d $RUNDIR || mkdir -p $RUNDIR
+
+
+exec ../bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+  --name $NAME \
+  --workers $WORKERS \
+  --bind=unix:$BIND \
+  --log-level=$LOG_LEVEL \
+  --log-file=-

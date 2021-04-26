@@ -1,0 +1,34 @@
+**** postgres ****
+sudo -u postgres psql postgres
+
+CREATE USER yesboss_user WITH PASSWORD 'yesboss_root';
+CREATE DATABASE yesboss_db OWNER yesboss_user;
+
+psql -h localhost -d yesboss_db -U yesboss_user
+
+
+django superuser:
+"username":"admin@yesboss.uz",
+"password":"123456",
+
+
+1) python manage.py loaddata user1.json
+2) python manage.py loaddata oauth2.json
+3) python manage.py loaddata geo_data.json
+
+
+ssh:
+159.89.3.191
+roo2020Yes_B@ss
+
+db:
+142.93.108.181
+roo2020Yes_DB@ss
+
+psql -c "alter user postgres with password 'ro@tDb_202@'"
+
+https://computingforgeeks.com/how-to-install-postgresql-12-on-centos-7/
+
+
+
+sudo timedatectl set-timezone Asia/Tashkent
